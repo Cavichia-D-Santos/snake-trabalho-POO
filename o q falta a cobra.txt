@@ -55,3 +55,27 @@ class Snake:
         """Desenha a cobra na tela."""
         for segmento in self.corpo:
             pygame.draw.rect(tela, self.corpo_colorido, pygame.Rect(segment[0], segment[1], 10, 10))
+
+    Jogador 1 - Classe Snake (Movimento e Crescimento)
+
+Desenvolver a lógica para o movimento da cobra usando teclas direcionais.
+Implementar o crescimento da cobra ao comer comida e gerenciar o corpo, como adicionar segmentos.
+Controlar a detecção de colisões com as paredes ou com o próprio corpo.
+
+    Jogador 2 - Classe Food (Comida e Posição Aleatória)
+
+Criar a lógica para a comida aparecer em posições aleatórias.
+Programar a detecção de colisão entre a cobra e a comida para aumentar o comprimento.
+Opcional: Implementar diferentes tipos de comida que dão mais pontos ou aumentam a velocidade.
+
+    Jogador 3 - Interface Gráfica e Scoreboard
+
+Responsável por desenhar os elementos do jogo na tela e atualizar o placar.
+Exibir o score em tempo real e incluir uma interface de fim de jogo com a pontuação final.
+Opcional: Adicionar feedback visual, como uma animação quando a comida é capturada.
+
+    Jogador 4 - Lógica Geral do Jogo (Classe Game)
+
+Controlar o loop principal do jogo e as condições de fim (quando a cobra colide com a parede ou consigo mesma).
+Integrar as classes Snake, Food e Scoreboard, coordenando as interações entre elas.
+Opcional: Adicionar um sistema de níveis, como aumentar a velocidade da cobra ou mudanças de cor.

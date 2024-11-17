@@ -1,25 +1,15 @@
 import pygame as py
-from entities import snake
-from entities import food
+from entities.snake import Snake
+from entities.food import food
+from telas.cenarioMain import tela
 
 py.init()  # Inicializador do jogo
+clock = py.time.Clock() ## This method has to do with FPS
 
-
-screen = py.display.set_mode((640, 640))  # Tamanho da tela e nome da página
-py.display.set_caption("Snake.exe")
-
-clock = py.time.Clock() ## This method has to do with FPS 
-
-
-background_color = (208, 202, 146)
-screen.fill(background_color)
-
-py.display.update()                                                                                 ## na tela a cada segmento da cobra;
-                                                                                  ## py.rect define a posição do retangulo e tamanho
-## Rectangles are used to place a surface much more efficiently and THEY HELP WITH DETECTING COLLISIONS. When you use rectangles, you
-## separete placing images in two different steps: Surface for image information and placement via rectangle
-
-snake = snake.Snake(800, 400) ## Criação de um instancia para o jogador. Aqui é setado o lugar que a cobrinha aparece no mapa
+snake = Snake() # Instancia para o jogador; Lugar que a cobrinha aparece no mapa
+food = food() # Instancia para usar a classe food
+tela = tela(640, 640) # Instancia para usar a classe fundo; Altura e largura da tela
+gameRunning = True # Para testar telas
 
 while True: ## Loop para encerrar o jogo, caso o usuário precione o botão de fechar pagina, e para que todo o jogo aconteça.
     for event in py.event.get():
@@ -39,10 +29,13 @@ while True: ## Loop para encerrar o jogo, caso o usuário precione o botão de f
             elif event.key == py.K_DOWN and snake.direcao != 'UP':
                 snake.direcao = 'DOWN'
 
+    if gameRunning: #Teste de troca entre telas
+        tela.tela_jogo()
+    else:
+        tela.tela_fim_jogo()
+
     snake.movimento()
-    screen.fill(background_color)
-    snake.cobra_tela(screen)
-    food.Food.food_screen(screen) #Ainda não entendi o erro. verificar!!!
+    snake.cobra_tela(tela.screen)
+    food.food(tela.screen)
     py.display.update()
     clock.tick(10)
-

@@ -30,6 +30,18 @@ class Snake():
         for pos in self.corpo:
             py.draw.rect(screen, self.cor_corpo, py.Rect(pos[0], pos[1], grid, grid))
 
-    #def aumentar_tamanho(self):
+    def aumentar_tamanho(self):
+        cabeca_x, cabeca_y = self.corpo[0]
 
+        if self.direcao == "RIGHT": 
+            nova_cabeca = (cabeca_x + grid, cabeca_y)
+        elif self.direcao == "LEFT":
+            nova_cabeca = (cabeca_x - grid, cabeca_y)
+        elif self.direcao == "UP":
+            nova_cabeca = (cabeca_x, cabeca_y - grid)
+        elif self.direcao == "DOWN":
+            nova_cabeca = (cabeca_x, cabeca_y + grid)
+
+        self.corpo = [nova_cabeca] + self.corpo
+    
     #def gameOver(self):

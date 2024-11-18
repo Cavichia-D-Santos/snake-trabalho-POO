@@ -1,13 +1,13 @@
 import pygame as py
 from entities.snake import Snake
-from entities.food import food
+from entities.food import Food
 from telas.cenarioMain import tela
 
 py.init()  # Inicializador do jogo
 clock = py.time.Clock() ## This method has to do with FPS
 
 snake = Snake() # Instancia para o jogador; Lugar que a cobrinha aparece no mapa
-food = food() # Instancia para usar a classe food
+food = Food() # Instancia para usar a classe food
 tela = tela(640, 640) # Instancia para usar a classe fundo; Altura e largura da tela
 gameRunning = True # Para testar telas
 
@@ -29,6 +29,12 @@ while True: ## Loop para encerrar o jogo, caso o usuário precione o botão de f
             elif event.key == py.K_DOWN and snake.direcao != 'UP':
                 snake.direcao = 'DOWN'
 
+        cabeca_x, cabeca_y = snake.corpo[0]
+
+        if cabeca_x == food.x and cabeca_y == food.y:
+            print("Colisão!")
+            snake.aumentar_tamanho()
+
     if gameRunning: #Teste de troca entre telas
         tela.tela_jogo()
     else:
@@ -36,6 +42,6 @@ while True: ## Loop para encerrar o jogo, caso o usuário precione o botão de f
 
     snake.movimento()
     snake.cobra_tela(tela.screen)
-    food.food(tela.screen)
+    food.food_tela(tela.screen)
     py.display.update()
     clock.tick(10)

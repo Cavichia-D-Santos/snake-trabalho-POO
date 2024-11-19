@@ -32,7 +32,7 @@ class Snake():
 
     def aumentar_tamanho(self):
         cabeca_x, cabeca_y = self.corpo[0]
-
+        nova_cabeca = (255, 255, 255)
         if self.direcao == "RIGHT": 
             nova_cabeca = (cabeca_x + grid, cabeca_y)
         elif self.direcao == "LEFT":
@@ -45,3 +45,4 @@ class Snake():
         self.corpo = [nova_cabeca] + self.corpo
     
     #def gameOver(self):
+        

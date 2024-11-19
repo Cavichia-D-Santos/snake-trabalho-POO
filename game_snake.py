@@ -30,10 +30,10 @@ while True: ## Loop para encerrar o jogo, caso o usuário precione o botão de f
                 snake.direcao = 'DOWN'
 
         cabeca_x, cabeca_y = snake.corpo[0]
-
         if cabeca_x == food.x and cabeca_y == food.y:
             print("Colisão!")
             snake.aumentar_tamanho()
+            food.regenerar_comida()
 
     if gameRunning: #Teste de troca entre telas
         tela.tela_jogo()

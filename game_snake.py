@@ -13,17 +13,20 @@ food = Food()
 tela = tela(640, 640)
 
 # Variaveis de jogo
-consumido = True
+
 gameRunning = True # Para testar telas
 pos = snake.corpo
 
 while True: ## Loop para encerrar o jogo, caso o usuário precione o botão de fechar pagina, e para que todo o jogo aconteça.
     consumido = False
+    morreu = False
 
     for event in py.event.get():
         if event.type == py.QUIT: 
             py.quit()
             exit()
+        if morreu:
+            py.font.Font(None, 74).render("Jogo Terminado", True, 255, 0, 0)
 
         elif event.type == py.KEYDOWN: ## Capta o evento da tecla precionada (metodo KEYDOWN);
                                        ## É proibido que o usuario tente pressionar uma direção oposta a direção atual para evitar
@@ -45,6 +48,8 @@ while True: ## Loop para encerrar o jogo, caso o usuário precione o botão de f
         consumido = True
 
         #food.consumida()
+    if (cabeca_x == 640) or (cabeca_y == 640) or (cabeca_x == -20) or (cabeca_y == -20):
+        exit()
 
     if gameRunning: #Teste de troca entre telas
         tela.tela_jogo()

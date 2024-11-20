@@ -3,7 +3,7 @@ grid = 20 # Tamanho de cada bloco na tela
 
 class Snake:
     def __init__(self, corpo):
-        self.corpo = [(0, 0), (0, 0), (0, 0)] ## A cobrinha está dividida em três segmentos - A medida que o jogo avança,
+        self.corpo = [(300, 300), (0, 0), (0, 0)] ## A cobrinha está dividida em três segmentos - A medida que o jogo avança,
                                                         ## o número de segmentos aumenta;
                                                         ## Cada segmento é representado por coordenadas x e y;
                                                         ## A cabeça da cobra está na posição [0].

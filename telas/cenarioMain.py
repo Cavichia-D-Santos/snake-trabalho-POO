@@ -21,3 +21,6 @@ class tela:# Caracteristicas da tela e da grid
     def tela_fim_jogo(self): # Ainda vou modificar, deixado apenas para teste
         fundoCor = (0, 0, 0)
         self.screen.fill(fundoCor)
+        font = py.font.Font(None, 74)
+        small_font = py.font.Font(None, 50)
+        self.screen.blit()

@@ -1,81 +1,8 @@
-import pygame
 
-class Snake:
-    def __init__(self, largura_tela, altura_tela):
-        # Inicializa a posição inicial da cobra (no meio da tela)
-        self.corpo = [(100, 100), (90, 100), (80, 100)]  # Corpo da cobra como lista de tuplas (x, y)
-        self.direcao = 'DIREITA'  # Direção inicial
-        self.corpo_colorido = (0, 255, 0)  # Cor do corpo da cobra (verde)
-        self.largura_tela = largura_tela
-        self.altura_tela = altura_tela
+ESSENCIAIS:
+- Incluir uma interface de fim de jogo com a pontuação final.
 
-    def mover(self):
-        """Move a cobra na direção atual."""
-        cabeca_x, cabeca_y = self.corpo[0]
-
-        if self.direcao == 'DIREITA':
-            nova_cabeca = (cabeca_x + 10, cabeca_y)
-        elif self.direcao == 'ESQUERDA':
-            nova_cabeca = (cabeca_x - 10, cabeca_y)
-        elif self.direcao == 'CIMA':
-            nova_cabeca = (cabeca_x, cabeca_y - 10)
-        elif self.direcao == 'BAIXO':
-            nova_cabeca = (cabeca_x, cabeca_y + 10)
-
-        # Adiciona a nova cabeça à lista do corpo e remove o último segmento
-        self.corpo = [nova_cabeca] + self.corpo[:-1]
-
-    def crescer(self):
-        """Faz a cobra crescer ao adicionar um novo segmento."""
-        cabeca_x, cabeca_y = self.corpo[0]
-        if self.direcao == 'DIREITA':
-            nova_cabeca = (cabeca_x + 10, cabeca_y)
-        elif self.direcao == 'ESQUERDA':
-            nova_cabeca = (cabeca_x - 10, cabeca_y)
-        elif self.direcao == 'CIMA':
-            nova_cabeca = (cabeca_x, cabeca_y - 10)
-        elif self.direcao == 'BAIXO':
-            nova_cabeca = (cabeca_x, cabeca_y + 10)
-
-        # Adiciona a nova cabeça na frente, mas não remove a cauda
-        self.corpo = [nova_cabeca] + self.corpo
-
-    def colisao(self):
-        """Verifica se a cobra colidiu com ela mesma ou com as bordas da tela."""
-        cabeca = self.corpo[0]
-        # Verifica colisão com as paredes
-        if cabeca[0] < 0 or cabeca[0] >= self.largura_tela or cabeca[1] < 0 or cabeca[1] >= self.altura_tela:
-            return True
-        # Verifica colisão com o próprio corpo
-        if cabeca in self.corpo[1:]:
-            return True
-        return False
-
-    def desenhar(self, tela):
-        """Desenha a cobra na tela."""
-        for segmento in self.corpo:
-            pygame.draw.rect(tela, self.corpo_colorido, pygame.Rect(segment[0], segment[1], 10, 10))
-
-    Jogador 1 - Classe Snake (Movimento e Crescimento)
-
-Desenvolver a lógica para o movimento da cobra usando teclas direcionais.
-Implementar o crescimento da cobra ao comer comida e gerenciar o corpo, como adicionar segmentos.
-Controlar a detecção de colisões com as paredes ou com o próprio corpo.
-
-    Jogador 2 - Classe Food (Comida e Posição Aleatória)
-
-Criar a lógica para a comida aparecer em posições aleatórias.
-Programar a detecção de colisão entre a cobra e a comida para aumentar o comprimento.
-Opcional: Implementar diferentes tipos de comida que dão mais pontos ou aumentam a velocidade.
-
-    Jogador 3 - Interface Gráfica e Scoreboard
-
-Responsável por desenhar os elementos do jogo na tela e atualizar o placar.
-Exibir o score em tempo real e incluir uma interface de fim de jogo com a pontuação final.
-Opcional: Adicionar feedback visual, como uma animação quando a comida é capturada.
-
-    Jogador 4 - Lógica Geral do Jogo (Classe Game)
-
-Controlar o loop principal do jogo e as condições de fim (quando a cobra colide com a parede ou consigo mesma).
-Integrar as classes Snake, Food e Scoreboard, coordenando as interações entre elas.
-Opcional: Adicionar um sistema de níveis, como aumentar a velocidade da cobra ou mudanças de cor.
+OPCIONAIS:
+- Implementar diferentes tipos de comida que dão mais pontos ou aumentam a velocidade.
+- Adicionar feedback visual, como uma animação quando a comida é capturada (OBS: nao acho que seja possivel)
+- Adicionar um sistema de níveis, como aumentar a velocidade da cobra ou mudanças de cor.

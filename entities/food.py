@@ -3,22 +3,16 @@ import random #Biblioteca para gerar um número aleatorio em um intervalo
 
 class Food:
     def __init__(self):
+        self.x = random.randint(0, 31) * 20 #Gera uma posicao x inicial
+        self.y = random.randint(0, 31) * 20 #Gera uma posicao y inicial
         self.cor = (255, 0, 0)
-        self.x = random.randint(0, (640 // 20) - 1) * 20 # posição x (posição orizontal) - O chat sugeriu a mult por 20 para alinhas as grades do Thiago
-        self.y = random.randint(0, (640 // 20) - 1) * 20 # posição x (posição vertical)
-        self.tamanho = 20 
 
-    def food_tela(self, screen):
-        py.draw.rect(screen, self.cor, py.Rect(self.x, self.y, self.tamanho, self.tamanho))
+    def food_tela(self, screen, consumido):
+        if consumido:
+            self.x = random.randint(0, 31) * 20  # Nova posicao x
+            self.y = random.randint(0, 31) * 20  # Nova posicao y
 
-    def regenerar_comida(self):
-        self.cor = (0,0, 0)
-        self.x = random.randint(0, (640 // 20) - 1) * self.tamanho
-        self.y = random.randint(0, (640 // 20) - 1) * self.tamanho
-        while self.cor == (0, 0, 0):
-            self.cor = (
-                random.randint(0, 255),
-                random.randint(0, 255),
-                random.randint(0, 255)
-            )
-            
+        py.draw.rect(screen, self.cor, py.Rect(self.x, self.y, 20, 20))
+
+
+    #def consumida(self, snake):

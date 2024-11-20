@@ -1,58 +1,59 @@
 import pygame as py
 from entities.snake import Snake
 from entities.food import Food
+from entities.colisao import colisoes
+from entities.points import points
 from telas.cenarioMain import tela
 
 py.init()  # Inicializador do jogo
 clock = py.time.Clock() ## This method has to do with FPS
 
-# Instancias
-snake = Snake([(120, 120), (90, 120), (80, 120)])   # Pos. inicial pra cobra; Coloquei aqui pra tentar
-                                                    # arrumar alguns conflitos, mas por enquanto nao consegui
-food = Food()
-tela = tela(640, 640)
-
 # Variaveis de jogo
-consumido = True
 gameRunning = True # Para testar telas
-pos = snake.corpo
+velocJogo = 10
+alturaTela = 640
+larguraTela = 640
+
+# Instancias
+tela = tela (alturaTela, larguraTela)
+snake = Snake()
+food = Food()
+points = points()
+colisao = colisoes(snake, food, points, larguraTela, alturaTela)
 
 while True: ## Loop para encerrar o jogo, caso o usuário precione o botão de fechar pagina, e para que todo o jogo aconteça.
-    consumido = False
+    while gameRunning: # Para reiniciar o jogo se o player perder
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                py.quit()
+                exit()
 
-    for event in py.event.get():
-        if event.type == py.QUIT: 
-            py.quit()
-            exit()
+            elif event.type == py.KEYDOWN: ## Capta o evento da tecla precionada (metodo KEYDOWN);
+                                           ## É proibido que o usuario tente pressionar uma direção oposta a direção atual para evitar
+                                           ## que a cobra volte e colida consigo mesma.
+                if event.key == py.K_LEFT and snake.direcao != 'RIGHT':
+                    snake.direcao = 'LEFT'
+                elif event.key == py.K_RIGHT and snake.direcao != 'LEFT':
+                    snake.direcao = 'RIGHT'
+                elif event.key == py.K_UP and snake.direcao != 'DOWN':
+                    snake.direcao = 'UP'
+                elif event.key == py.K_DOWN and snake.direcao != 'UP':
+                    snake.direcao = 'DOWN'
 
-        elif event.type == py.KEYDOWN: ## Capta o evento da tecla precionada (metodo KEYDOWN);
-                                       ## É proibido que o usuario tente pressionar uma direção oposta a direção atual para evitar
-                                       ## que a cobra volte e colida consigo mesma.
-            if event.key == py.K_LEFT and snake.direcao != 'RIGHT':
-                snake.direcao = 'LEFT'
-            elif event.key == py.K_RIGHT and snake.direcao != 'LEFT':
-                snake.direcao = 'RIGHT'
-            elif event.key == py.K_UP and snake.direcao != 'DOWN':
-                snake.direcao = 'UP'
-            elif event.key == py.K_DOWN and snake.direcao != 'UP':
-                snake.direcao = 'DOWN'
+        # funcoes
+        snake.movimento()
 
-    cabeca_x, cabeca_y = snake.corpo[0]
-
-    if cabeca_x == food.x and cabeca_y == food.y:
-        print("Colisão!")
-        snake.aumentar_tamanho()
-        consumido = True
-
-        #food.consumida()
-
-    if gameRunning: #Teste de troca entre telas
+        # desenhar na tela (obs: ordem de cima para baixo)
         tela.tela_jogo()
-    else:
-        tela.tela_fim_jogo()
+        food.desenhar(tela.screen)
+        snake.cobra_tela(tela.screen)
+        points.desenhar(tela.screen)
 
-    snake.movimento()
-    snake.cobra_tela(tela.screen)
-    food.food_tela(tela.screen, consumido) #Inclui 'consumido' pra gerar uma nova posicao sempre que a comida encosta no player
-    py.display.update()
-    clock.tick(10)
+        # colisoes
+        colisao.snake_food()
+        colisao.snake_paredes()
+        colisao.snake_snake()
+
+        # jogo (refresh da tela e tick)
+        py.display.update()
+        clock.tick(velocJogo)

@@ -13,7 +13,6 @@ class colisoes:
     def snake_food(self):
         self.cabeca_x, self.cabeca_y = self.snake.corpo[0]  # pos. x e y da cabeca
         if self.cabeca_x == self.food.x and self.cabeca_y == self.food.y:
-            print("Colisão!")
             self.snake.aumentar_tamanho()
             self.food.food_coord()
             self.points.pontuacao()

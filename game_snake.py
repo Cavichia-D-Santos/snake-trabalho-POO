@@ -6,31 +6,29 @@ from entities.points import points
 from telas.cenarioMain import tela
 
 py.init()  # Inicializador do jogo
-clock = py.time.Clock() ## This method has to do with FPS
+clock = py.time.Clock()
 
-# Variaveis de jogo
-gameRunning = True # Para testar telas
-velocJogo = 10
+# Variáveis de jogo
+gameRunning = True  # Para testar telas
+v_jogo = 10
 alturaTela = 640
 larguraTela = 640
 
 # Instancias
-tela = tela (alturaTela, larguraTela)
 snake = Snake()
 food = Food()
 points = points()
+tela = tela(alturaTela, larguraTela, points)
 colisao = colisoes(snake, food, points, larguraTela, alturaTela)
 
-while True: ## Loop para encerrar o jogo, caso o usuário precione o botão de fechar pagina, e para que todo o jogo aconteça.
-    while gameRunning: # Para reiniciar o jogo se o player perder
+while True:  # Loop para encerrar o jogo, caso o usuário pressione o botão de fechar pagina, e para que todo o jogo aconteça.
+    while gameRunning:
         for event in py.event.get():
             if event.type == py.QUIT:
                 py.quit()
                 exit()
 
-            elif event.type == py.KEYDOWN: ## Capta o evento da tecla precionada (metodo KEYDOWN);
-                                           ## É proibido que o usuario tente pressionar uma direção oposta a direção atual para evitar
-                                           ## que a cobra volte e colida consigo mesma.
+            elif event.type == py.KEYDOWN:
                 if event.key == py.K_LEFT and snake.direcao != 'RIGHT':
                     snake.direcao = 'LEFT'
                 elif event.key == py.K_RIGHT and snake.direcao != 'LEFT':
@@ -42,29 +40,29 @@ while True: ## Loop para encerrar o jogo, caso o usuário precione o botão de f
                 elif event.key == py.K_r:
                     points.resetar()
                     snake.resetar()
-                    gameRunning = True                     # TENTAR FAZER O JOGO RESETAR!!!
+                    colisao.status = 'vivo'
+                    gameRunning = True
                 elif event.key == py.K_q:
                     py.quit()
                     exit()
 
-        # funcoes
+        # funções
         snake.movimento()
-
-        # desenhar na tela (obs: ordem de cima para baixo)
+        pontos = points.pontos_final
+        # desenhar na tela (obs.: ordem de cima para baixo)
         if colisao.status != 'morto':
             tela.tela_jogo()
             food.desenhar(tela.screen)
             snake.cobra_tela(tela.screen)
             points.desenhar(tela.screen)
         else:
+            points.total_pontos()
             tela.tela_fim_jogo()
 
         colisao.snake_food()
         colisao.snake_snake()
         colisao.snake_paredes()
 
-        print(colisao.status)
-
         # jogo (refresh da tela e tick)
         py.display.update()
-        clock.tick(velocJogo)
+        clock.tick(v_jogo)

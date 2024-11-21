@@ -1,12 +1,17 @@
 import pygame as py
 
+
 class points:
     def __init__(self):
         self.pontos = 0
+        self.pontos_final = 0
         self.font = py.font.Font("./fontes/PixelDigivolve.otf", 30)
 
     def pontuacao(self):
         self.pontos += 1
+
+    def total_pontos(self):
+        self.pontos_final = self.pontos
 
     def resetar(self):
         self.pontos = 0

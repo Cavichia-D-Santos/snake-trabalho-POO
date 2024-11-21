@@ -6,3 +6,12 @@ OPCIONAIS:
 - Implementar diferentes tipos de comida que dão mais pontos ou aumentam a velocidade.
 - Adicionar feedback visual, como uma animação quando a comida é capturada (OBS: nao acho que seja possivel)
 - Adicionar um sistema de níveis, como aumentar a velocidade da cobra ou mudanças de cor.
+
+        for event in py.event.get():
+            if event.type == py.KEYDOWN:
+                if event.key ==py.K_q:
+                    py.quit()
+                    exit()
+                elif event.key ==py.K_r:
+                    snake.resetar()
+                    points.resetar()

@@ -39,20 +39,31 @@ while True: ## Loop para encerrar o jogo, caso o usuário precione o botão de f
                     snake.direcao = 'UP'
                 elif event.key == py.K_DOWN and snake.direcao != 'UP':
                     snake.direcao = 'DOWN'
+                elif event.key == py.K_r:
+                    points.resetar()
+                    snake.resetar()
+                    gameRunning = True                     # TENTAR FAZER O JOGO RESETAR!!!
+                elif event.key == py.K_q:
+                    py.quit()
+                    exit()
 
         # funcoes
         snake.movimento()
 
         # desenhar na tela (obs: ordem de cima para baixo)
-        tela.tela_jogo()
-        food.desenhar(tela.screen)
-        snake.cobra_tela(tela.screen)
-        points.desenhar(tela.screen)
+        if colisao.status != 'morto':
+            tela.tela_jogo()
+            food.desenhar(tela.screen)
+            snake.cobra_tela(tela.screen)
+            points.desenhar(tela.screen)
+        else:
+            tela.tela_fim_jogo()
 
-        # colisoes
         colisao.snake_food()
-        colisao.snake_paredes()
         colisao.snake_snake()
+        colisao.snake_paredes()
+
+        print(colisao.status)
 
         # jogo (refresh da tela e tick)
         py.display.update()

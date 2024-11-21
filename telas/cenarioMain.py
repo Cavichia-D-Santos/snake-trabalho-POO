@@ -1,4 +1,7 @@
 import pygame as py
+import pygame.image
+from entities import points
+
 
 class tela:# Caracteristicas da tela e da grid
     def __init__(self, alturaTela, larguraTela):
@@ -19,8 +22,20 @@ class tela:# Caracteristicas da tela e da grid
             py.draw.line(self.screen, linhasFundo, (0, y), (self.larguraTela, y))
 
     def tela_fim_jogo(self): # Ainda vou modificar, deixado apenas para teste
-        fundoCor = (0, 0, 0)
-        self.screen.fill(fundoCor)
-        font = py.font.Font(None, 74)
-        small_font = py.font.Font(None, 50)
-        self.screen.blit()
+        imagem = pygame.image.load('tela-game-over.png')
+        fonte = 'Gameplay.ttf'
+        verde = (0, 100, 0)
+        font = py.font.Font(fonte, 50)
+        medium_font = py.font.Font(fonte, 25)
+        small_font = py.font.Font(fonte, 20)
+        self.screen.blit(imagem, (141, 161), (131, 131, 419, 319))
+
+        game_over = font.render("Game Over", True, (0, 100, 0))
+        pontuacao = medium_font.render(f'Pontos: {points.points().pontos}', True, verde) # FAZER OS PONTOS APARECEREM CORRETAMENTE
+        reiniciar = small_font.render('Reiniciar (R)', True, verde)
+        quitar = small_font.render('Sair (Q)', True, verde)
+
+        self.screen.blit(game_over, (160, 175))
+        self.screen.blit(pontuacao, (245, 300))
+        self.screen.blit(reiniciar, (165, 435))
+        self.screen.blit(quitar, (380, 435))

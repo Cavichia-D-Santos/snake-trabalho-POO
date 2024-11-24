@@ -1,6 +1,5 @@
 from entities import enemy_shooter
 
-
 class colisoes:
     def __init__(self, snake, food, points, largura_tela, altura_tela, bullet_bottom,
                  bullet_up, bullet_left, bullet_right):
@@ -35,6 +34,7 @@ class colisoes:
             if corpo_x == self.cabeca_x and corpo_y == self.cabeca_y:
                 self.status = 'morto'
 
+#INIMIGO DA FASE 1
     def snake_tiro1(self):
         for bala in self.bullet1[:]:
             if self.cabeca_x == bala.rect.x and self.cabeca_y == bala.rect.y:
@@ -55,3 +55,11 @@ class colisoes:
             if self.cabeca_x == bala.rect.x and self.cabeca_y == bala.rect.y:
                 self.status = 'morto'
 
+#INIMIGO DA FASE 2
+    def snake_pathEnemy(self, pathEnemy):
+        x, y = pathEnemy.inimigo_Head # pos. canto esquerdo do inimigo
+        self.cabeca_x, self.cabeca_y = self.snake.corpo[0]
+        # print(f"Cabeça da cobra: {self.cabeca_x}, {self.cabeca_y}")
+        # print(f"Inimigo: ({x}, {y}) até ({x + pathEnemy.hitbox}, {y + pathEnemy.hitbox})")
+        if x <= self.cabeca_x < x + pathEnemy.hitbox and y <= self.cabeca_y < y + pathEnemy.hitbox:
+            self.status = 'morto'

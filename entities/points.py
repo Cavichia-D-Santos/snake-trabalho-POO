@@ -3,7 +3,7 @@ import pygame as py
 
 class points:
     def __init__(self):
-        self.pontos = 0
+        self.pontos = 10
         self.pontos_final = 0
         self.font = py.font.Font("./fontes/PixelDigivolve.otf", 30)
 

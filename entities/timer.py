@@ -5,7 +5,7 @@ class timer:
     def __init__(self):
         self.image = pygame.image.load('./entities/itens_imagens/clock.png')
         self.image = pygame.transform.scale(self.image, (30, 30))
-        self.tempo = 10
+        self.tempo = 60
         self.font = pygame.font.Font("./fontes/PixelDigivolve.otf", 30)
         self.ultimo_tick = pygame.time.get_ticks()
 

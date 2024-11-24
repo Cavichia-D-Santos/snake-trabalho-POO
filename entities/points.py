@@ -3,7 +3,7 @@ import pygame as py
 
 class points:
     def __init__(self):
-        self.pontos = 0
+        self.pontos = 10
         self.pontos_final = 0
         self.font = py.font.Font("./fontes/PixelDigivolve.otf", 30)
 
@@ -18,4 +18,6 @@ class points:
 
     def desenhar(self, screen):
         pts_tela = self.font.render('Pontos: ' + str(self.pontos), True, (255, 255, 255))
+        obj_pontos = self.font.render('/10', True, (255, 255, 255))
         screen.blit(pts_tela, (20, 20))
+        screen.blit(obj_pontos, (195, 20))

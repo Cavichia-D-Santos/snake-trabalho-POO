@@ -18,4 +18,6 @@ class points:
 
     def desenhar(self, screen):
         pts_tela = self.font.render('Pontos: ' + str(self.pontos), True, (255, 255, 255))
+        obj_pontos = self.font.render('/10', True, (255, 255, 255))
         screen.blit(pts_tela, (20, 20))
+        screen.blit(obj_pontos, (195, 20))

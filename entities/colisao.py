@@ -39,22 +39,19 @@ class colisoes:
         for bala in self.bullet1[:]:
             if self.cabeca_x == bala.rect.x and self.cabeca_y == bala.rect.y:
                 self.status = 'morto'
-            print(bala)
 
     def snake_tiro2(self):
         for bala in self.bullet2[:]:
             if self.cabeca_x == bala.rect.x and self.cabeca_y == bala.rect.y:
                 self.status = 'morto'
-            print(bala)
 
     def snake_tiro3(self):
         for bala in self.bullet3[:]:
             if self.cabeca_x == bala.rect.x and self.cabeca_y == bala.rect.y:
                 self.status = 'morto'
-            print(bala)
 
     def snake_tiro4(self):
         for bala in self.bullet4[:]:
             if self.cabeca_x == bala.rect.x and self.cabeca_y == bala.rect.y:
                 self.status = 'morto'
-            print(bala)
+

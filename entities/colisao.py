@@ -26,3 +26,11 @@ class colisoes:
         for corpo_x, corpo_y in self.snake.corpo[2:]:  # Verifica cada tupla do corpo, ignorando a cabeca (índice 0)
             if corpo_x == self.cabeca_x and corpo_y == self.cabeca_y:
                 self.status = 'morto'
+
+    def snake_pathEnemy(self, pathEnemy):
+        x, y = pathEnemy.inimigo_Head # pos. canto esquerdo do inimigo
+        self.cabeca_x, self.cabeca_y = self.snake.corpo[0]
+        # print(f"Cabeça da cobra: {self.cabeca_x}, {self.cabeca_y}")
+        # print(f"Inimigo: ({x}, {y}) até ({x + pathEnemy.hitbox}, {y + pathEnemy.hitbox})")
+        if x <= self.cabeca_x < x + pathEnemy.hitbox and y <= self.cabeca_y < y + pathEnemy.hitbox:
+            self.status = 'morto'

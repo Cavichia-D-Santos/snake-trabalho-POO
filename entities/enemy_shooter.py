@@ -37,18 +37,3 @@ class enemy_shooter:
             # Remove a bala se ela sair da tela
             if bala.rect.right < 0 or bala.rect.left > tela.get_width() or bala.rect.top > tela.get_height() or bala.rect.bottom < 0:
                 self.bullets.remove(bala)
-
-
-# class Tiro:
-#     def __init__(self, x, y, velocidade, atirador):
-#         self.rect = pygame.Rect(x, y, 20, 20)  # Hitbox do tiro
-#         self.cor = (255, 255, 255)
-#         self.velocidade = velocidade
-#         self.atirador = atirador
-#
-#
-#
-#     def movimentar(self):
-#
-#         if self.atirador =
-#

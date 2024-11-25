@@ -1,6 +1,7 @@
 import pygame as py
 import random #Biblioteca para gerar um número aleatorio em um intervalo
 
+
 class Food:
     def __init__(self):
         self.cor = (255, 0, 0)

@@ -7,6 +7,7 @@ from entities.pathEnemy import PathEnemy
 from telas.cenarioMain import tela
 from entities.enemy_shooter import enemy_shooter
 from entities.timer import timer
+from entities.enemy_blue_team import Blue_team
 
 py.init()  # Inicializador do jogo
 clock = py.time.Clock()
@@ -23,6 +24,7 @@ snake = Snake()
 food = Food()
 points = points()
 pathEnemy = PathEnemy()
+bt_enemy = Blue_team(food)
 tela = tela(alturaTela, larguraTela, points)
 timer = timer()
 
@@ -32,7 +34,8 @@ enemy_shooter_left = enemy_shooter(-10, 190, 2000, 0, 20)
 enemy_shooter_right = enemy_shooter(570, 370, 2000, 180, 20)
 
 colisao = colisoes(snake, food, points, larguraTela, alturaTela, enemy_shooter_bottom.bullets,
-                   enemy_shooter_up.bullets, enemy_shooter_left.bullets, enemy_shooter_right.bullets)
+                   enemy_shooter_up.bullets, enemy_shooter_left.bullets, enemy_shooter_right.bullets,
+                   bt_enemy.azuis, bt_enemy)
 
 while True:  # Loop para encerrar o jogo, caso o usuário pressione o botão de fechar pagina, e para que todo o jogo aconteça.
     while gameRunning:
@@ -60,7 +63,6 @@ while True:  # Loop para encerrar o jogo, caso o usuário pressione o botão de 
                     py.quit()
                     exit()
 
-        # funções
         snake.movimento()
         pontos = points.pontos_final
         # desenhar na tela (obs.: ordem de cima para baixo)
@@ -117,8 +119,31 @@ while True:  # Loop para encerrar o jogo, caso o usuário pressione o botão de 
                 if timer.tempo == -1:
                     colisao.status = 'morto'
 
-                if points.pontos == 20:
+                if points.pontos == 10:
                     fase = 3
+
+            if fase == 3:
+                tela.tela_jogo()
+                food.desenhar(tela.screen)
+                snake.cobra_tela(tela.screen)
+                points.desenhar(tela.screen)
+                bt_enemy.destruir_chao()
+                bt_enemy.desenhar_chao(tela.screen)
+                bt_enemy.desenhar_inimigo(tela.screen)
+                bt_enemy.mover(larguraTela, alturaTela)
+                timer.desenhar(tela.screen)
+                timer.contar_tempo()
+
+                colisao.snake_azul()
+                colisao.snake_boss_azul()
+
+                if timer.tempo == -1:
+                    colisao.status = 'morto'
+
+                if points.pontos == 11:
+                    tela.tela_parabens()
+                    gameRunning = False
+                    # Ver um jeito de ainda dar pra reiniciar.
         else:
             fase = 1
             timer.resetar()

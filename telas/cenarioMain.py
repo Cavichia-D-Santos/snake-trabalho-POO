@@ -39,3 +39,25 @@ class tela:  # Características da tela e da grid
         self.screen.blit(pontuacao, (245, 300))
         self.screen.blit(reiniciar, (165, 435))
         self.screen.blit(quitar, (380, 435))
+
+    def tela_parabens(self):
+        imagem = pygame.image.load('./telas/tela-game-over.png')
+        fonte = './fontes/Gameplay.ttf'
+        verde = (0, 100, 0)
+        font = py.font.Font(fonte, 50)
+        medium_font = py.font.Font(fonte, 20)
+        small_font = py.font.Font(fonte, 18)
+        self.screen.blit(imagem, (141, 161), (131, 131, 419, 319))
+
+        parabens = font.render("VITORIA!", True, (0, 100, 0))
+        mensagem1 = small_font.render("O Blue Team foi vencido", True, verde)
+        mensagem2 = small_font.render("e o worm dominou toda a rede!", True, verde)
+        reiniciar = medium_font.render('Reiniciar (R)', True, verde)
+        quitar = medium_font.render('Sair (Q)', True, verde)
+
+        self.screen.blit(parabens, (205, 175))
+        self.screen.blit(mensagem1, (185, 300))
+        self.screen.blit(mensagem2, (150, 330))
+        self.screen.blit(reiniciar, (165, 435))
+        self.screen.blit(quitar, (380, 435))
+

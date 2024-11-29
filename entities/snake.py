@@ -3,11 +3,10 @@ import pygame as py
 
 class Snake:
     def __init__(self):
-        self.corpo = (
-            [(120, 120), (90, 120), (80, 120)])
+        self.corpo = ([(100, 100), (90, 100), (80, 100)])
         self.direcao = 'RIGHT'
         self.nova_cabeca = None
-        self.cor_corpo = (0, 180, 0)
+        self.cor_corpo = (0, 0, 0)
         self.grid = 20  # Tamanho de cada bloco na tela
         self.cabeca_rect = None
 
@@ -30,13 +29,18 @@ class Snake:
         # COLOQUEI A LINHA ABAIXO PARA COLIDIR COM O INIMIGO 3!!! -MALISSE
         self.cabeca_rect = py.Rect(cabeca_x, cabeca_y, 20, 20)
 
-    def cobra_tela(self, screen):  # Desenha a cobrinha na tela!
-        for pos in self.corpo:
-            py.draw.rect(screen, self.cor_corpo, py.Rect(pos[0], pos[1], self.grid, self.grid))
+    def cobra_tela(self, screen):
+        for i, cor in enumerate(self.corpo): # Alterna cores entre segmentos; Calcula pelo numero da pos. do segmento
+            if i %2 == 0:
+                self.cor_corpo = (0, 180, 0)
+            else:
+                self.cor_corpo = (0, 80, 0)
+
+            py.draw.rect(screen, self.cor_corpo, py.Rect(cor[0], cor[1], self.grid, self.grid))
 
     def aumentar_tamanho(self):
         self.corpo = [self.nova_cabeca] + self.corpo
 
     def resetar(self):
-        self.corpo = ([(120, 120), (90, 120), (80, 120)])
+        self.corpo = ([(100, 100), (90, 100), (80, 100)])
         self.direcao = 'RIGHT'

@@ -3,7 +3,7 @@ import pygame
 
 class timer:
     def __init__(self):
-        self.image = pygame.image.load('./entities/itens_imagens/clock.png')
+        self.image = pygame.image.load('./entities/imagens_src/clock.png')
         self.image = pygame.transform.scale(self.image, (30, 30))
         self.tempo = 60
         self.font = pygame.font.Font("./fontes/PixelDigivolve.otf", 30)

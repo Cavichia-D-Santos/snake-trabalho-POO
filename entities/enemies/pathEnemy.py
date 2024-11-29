@@ -2,14 +2,13 @@ import pygame as py
 import random
 
 class PathEnemy:
-    def __init__(self,):
-
+    def __init__(self, init):
         self.hitbox = 40 # Tamanho do dano do inimigo
-        self.posicoes = ([(0, 0), (0, 0), (0, 0)])
+        self.posicoes = init
         self.inimigo_Head = self.posicoes[0] # Ponto superior esquerdo do inimigo
-        self.proxima_Pos = 1
+        self.proxima_Pos = 0
 
-    def andar(self, posFase, snake): #quant_Pos -> quantas posicoes o inimigo terá na fase
+    def andar(self, posFase, snake):
         grid = snake.grid
         prox_x, prox_y = posFase[self.proxima_Pos]
         x, y = self.inimigo_Head
@@ -33,6 +32,6 @@ class PathEnemy:
 
     def desenhar(self, screen):
         x, y = self.inimigo_Head
-        imagem = py.image.load('./entities/inimigos_Sprites/pathEnemy.png')
+        imagem = py.image.load('./entities/imagens_src/pathEnemy.png')
         imagem_redimensionada = py.transform.scale(imagem, (40, 40))
         screen.blit(imagem_redimensionada, (x, y))

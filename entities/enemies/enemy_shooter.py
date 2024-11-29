@@ -5,7 +5,7 @@ from entities.bullet import Bullet
 
 class enemy_shooter:
     def __init__(self, x, y, tempo_ataque, angulo, vel_tiro):
-        self.image = pygame.image.load('./entities/inimigos_imagens/shooter.png')
+        self.image = pygame.image.load('./entities/imagens_src/shooter.png')
         self.image = pygame.transform.scale(self.image, (80, 80))  # Ajusta o tamanho da imagem
         self.rect = self.image.get_rect(topleft=(x, y))
         self.tempo_ataque = tempo_ataque

@@ -1,11 +1,11 @@
 import pygame
 import random
-from entities.enemy_bt_attack import Blue_floor
+from entities.enemies.enemy_bt_attack import Blue_floor
 
 
 class Blue_team:
     def __init__(self, food):
-        self.image = pygame.image.load('./entities/inimigos_Sprites/blue_team.png')
+        self.image = pygame.image.load('./entities/imagens_src/blue_team.png')
         self.image = pygame.transform.scale(self.image, (250, 210))
         self.rect = self.image.get_rect(topleft=(194, 240))
         self.ultimo_ataque = pygame.time.get_ticks()

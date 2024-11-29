@@ -1,8 +1,6 @@
-from entities import enemy_shooter
-
 class colisoes:
     def __init__(self, snake, food, points, largura_tela, altura_tela, bullet_bottom,
-                 bullet_up, bullet_left, bullet_right, azul, azul_bt):
+                 bullet_up, bullet_left, bullet_right, azul, azul_bt, firew):
         self.food = food
         self.snake = snake
         self.points = points
@@ -17,6 +15,7 @@ class colisoes:
         self.bullet4 = bullet_right
         self.azul = azul
         self.azul_bt = azul_bt
+        self.firew = firew
 
     # colisões separadas por entidade (cobra com comida; cobra com paredes; cobra com corpo)
     def snake_food(self):
@@ -61,10 +60,27 @@ class colisoes:
     def snake_pathEnemy(self, pathEnemy):
         x, y = pathEnemy.inimigo_Head # pos. canto esquerdo do inimigo
         self.cabeca_x, self.cabeca_y = self.snake.corpo[0]
-        # print(f"Cabeça da cobra: {self.cabeca_x}, {self.cabeca_y}")
-        # print(f"Inimigo: ({x}, {y}) até ({x + pathEnemy.hitbox}, {y + pathEnemy.hitbox})")
         if x <= self.cabeca_x < x + pathEnemy.hitbox and y <= self.cabeca_y < y + pathEnemy.hitbox:
             self.status = 'morto'
+
+    def snake_firewall(self, firew):
+        firewall = firew.posicoes
+        self.cabeca_x, self.cabeca_y = self.snake.corpo[0]
+        for pos in range(firew.posicoes[0][0], firew.posicoes[0][1], 20): # Parede horizontal
+            if firewall[0][0] <= self.cabeca_x < firewall[0][1] and firewall[0][2] <= self.cabeca_y <= firewall[0][2] + 20:
+                self.status = 'morto'
+        for pos in range(firew.posicoes[1][0], firew.posicoes[1][1], 20): # Parede vertical
+            if firewall[1][0] <= self.cabeca_y < firewall[1][1] and firewall[1][2] <= self.cabeca_x <= firewall[1][2] + 20:
+                self.status = 'morto'
+
+    def food_wall(self, firew):
+        firewall = firew.posicoes
+        for pos in range(firew.posicoes[0][0], firew.posicoes[0][1], 1):
+            if firewall[0][0] <= self.food.x < firewall[0][1] and firewall[0][2] <= self.food.y <= firewall[0][2] + 20:
+                self.food.food_coord()
+        for pos in range(firew.posicoes[1][0], firew.posicoes[1][1], 1):
+            if firewall[1][0] <= self.food.x < firewall[1][1] and firewall[1][2] <= self.food.y <= firewall[1][2] + 20:
+                self.food.food_coord()
 
 # INIMIGO DA FASE 3
     def snake_azul(self):

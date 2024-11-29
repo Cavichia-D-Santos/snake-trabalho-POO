@@ -1,9 +1,0 @@
-
-ESSENCIAIS:
-- Incluir uma interface de fim de jogo com a pontuação final. *FEITO*
-
-OPCIONAIS:
-- Implementar diferentes tipos de comida que dão mais pontos ou aumentam a velocidade.
-- Adicionar feedback visual, como uma animação quando a comida é capturada (OBS: nao acho que seja possível)
-- Adicionar um sistema de níveis, como aumentar a velocidade da cobra ou mudanças de cor.
-
